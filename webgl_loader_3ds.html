@@ -38,7 +38,7 @@
         camera = new THREE.PerspectiveCamera(
           60,
           window.innerWidth/window.innerHeight,
-          0.1,
+          1,
           10
         );
         camera.position.z = 2;
@@ -51,17 +51,17 @@
         scene.add(directionalLight);
 
         // 3ds files dont store normal maps
-        const normal = new THREE.TextureLoader().load(
-          "models/textures/normal.jpg"
-        );
+        // const normal = new THREE.TextureLoader().load(
+        //   "models/textures/normal.jpg"
+        // );
 
         const loader = new THREE.TDSLoader();
-        loader.setResourcePath("models/textures/");
-        loader.load("models/portalgun.3ds", function (object) {
+        // loader.setResourcePath("models/textures/");
+        loader.load("models/sake.3ds", function (object) {
           object.traverse(function (child) {
             if (child.isMesh) {
               child.material.specular.setScalar(0.1);
-              child.material.normalMap = normal;
+              // child.material.normalMap = normal;
             }
           });
 

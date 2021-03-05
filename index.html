@@ -6,12 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThreeJsTest</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"></script>
-    <script src="./TDSLoader.js"></script>
-    <script src="./OrbitControls.js"></script>
+    <!-- <script src="./TDSLoader.js"></script>
+    <script src="./OrbitControls.js"></script> -->
     <script src="./index.js"></script>
     
 </head>
 <body>
     <canvas id="myCanvas"></canvas>
 </body>
+    <script>
+        function main() {
+            const canvas = document.querySelector("#myCanvas")
+            const renderer = new THREE.WebGLRenderer({canvas})
+
+            const fov = 75; // field of view 垂直方向に７５度
+            const aspect = 2; // 表示アスペクト　デフォルトは2
+            const near = 0.1; // near と far は、レンダリングされるカメラの前のスペースを表します。 その範囲の前またはその範囲の後はクリップされます（描画されません）
+            const far = 5;
+            const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+
+            camera.position.z = 2; // カメラはデフォルトで、Yを上にして-Z軸を見下ろします
+
+            const scene = new THREE.Scene(); // three.jsの Scene は、シーングラフのフォームのルートです
+
+            // ボックスのデータが含まれている BoxGeometry を作成します
+            const boxWidth = 1;
+            const boxHeight = 1;
+            const boxDepth = 1;
+            const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+
+            const material = new THREE.MeshBasicMaterial({color: 0x44aa88}); //基本的なマテリアルを作成し、色を設定します
+
+            const cube = new THREE.Mesh(geometry, material); // Mesh は Geometry (オブジェクトの形状)と Material （オブジェクトの描画方法、光沢または平坦、適用する色、適用するテクステャなど）を組み合わせます
+            
+            scene.add(cube);
+
+            renderer.render(scene, camera);
+        }
+    </script>
 </html>
